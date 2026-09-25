@@ -4,15 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Careers | JKUAT Enterprises Ltd</title>
-  <meta name="description" content="Explore current job openings at JKUAT Enterprises Ltd (JKUATES) and build your career with us.">
+  <meta name="description" content="Current job vacancies at JKUAT Enterprises Ltd (JKUATES). Apply online or contact our recruitment team.">
   <meta property="og:title" content="Careers at JKUAT Enterprises Ltd">
-  <meta property="og:description" content="Explore current openings and apply online.">
+  <meta property="og:description" content="Current vacancies. Apply online in minutes.">
   <meta property="og:type" content="website">
+  <!-- DRAFT: remove this line and the .draft-banner block before go-live -->
+  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 
   <!-- Zoho Recruit embed stylesheet (part of Zoho's official "Embed Jobs" snippet) -->
   <link rel="stylesheet" href="https://static.zohocdn.com/recruit/embed_careers_site/css/v1.1/embed_jobs.css" type="text/css">
@@ -20,122 +22,52 @@
 </head>
 <body>
 
-  <!-- ============ TOP BAR ============ -->
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <span>Equal opportunity employer</span>
-      <!-- EDIT: replace with the real recruitment contact -->
-      <a href="mailto:careers@jkuates.co.ke">careers@jkuates.co.ke</a>
-    </div>
+  <!-- DRAFT: remove before go-live -->
+  <div class="draft-banner" role="note">
+    <strong>Draft for review.</strong> This is not the live JKUATES careers site.
   </div>
 
   <!-- ============ HEADER ============ -->
   <header class="header" id="top">
-    <div class="container header__inner">
-      <a class="brand" href="https://jkuates.co.ke" aria-label="JKUAT Enterprises Ltd home">
-        <!-- EDIT: drop the official logo at assets/img/logo.svg (or .png) and it will be used here -->
-        <img src="assets/img/logo.svg" alt="JKUAT Enterprises Ltd" class="brand__logo" onerror="this.remove()">
-        <span class="brand__text">
-          <strong>JKUATES</strong>
-          <small>JKUAT Enterprises Ltd</small>
-        </span>
-      </a>
+    <div class="container">
+      <div class="header__inner">
+        <a class="brand" href="https://jkuates.co.ke" aria-label="JKUAT Enterprises Ltd home">
+          <!-- EDIT: replace with a local copy (assets/img/logo.png) before go-live -->
+          <img src="https://jkuates.co.ke/index.php/images/logos/logo.png" alt="JKUAT Enterprises Ltd" class="brand__logo" onerror="this.remove()">
+          <span class="brand__text">
+            <strong>JKUATES Careers</strong>
+            <small>JKUAT Enterprises Ltd</small>
+          </span>
+        </a>
 
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
-        <span></span><span></span><span></span>
-      </button>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
 
-      <nav class="nav" id="nav">
-        <a href="#why">Why JKUATES</a>
-        <a href="#openings">Open Positions</a>
-        <a href="#process">Hiring Process</a>
-        <a href="#faq">FAQs</a>
-        <a href="https://jkuates.co.ke" class="nav__muted">Main Website</a>
-        <a href="#openings" class="btn btn--accent btn--sm">View Jobs</a>
-      </nav>
+        <nav class="nav" id="nav">
+          <a href="#openings">Vacancies</a>
+          <a href="#apply">How to apply</a>
+          <a href="https://jkuates.co.ke">Main website</a>
+          <a href="#contact" class="btn btn--primary btn--sm">Contact us
+            <span class="btn__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+          </a>
+        </nav>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- ============ HERO ============ -->
+    <!-- ============ SCREEN 1: SHORT BANNER + VACANCIES ============ -->
     <section class="hero">
+      <div class="hero__contours" aria-hidden="true"></div>
       <div class="container hero__inner">
-        <div class="hero__copy">
-          <p class="eyebrow">Careers at JKUATES</p>
-          <h1>Build a meaningful career where knowledge meets enterprise.</h1>
-          <p class="lead">
-            Join a team that turns university expertise into real services for clients across Kenya.
-            Explore our current openings and apply online in a few minutes.
-          </p>
-          <div class="hero__actions">
-            <a href="#openings" class="btn btn--accent">Browse open positions</a>
-            <a href="#process" class="btn btn--ghost">How we hire</a>
-          </div>
-        </div>
-        <div class="hero__card" aria-hidden="true">
-          <div class="stat"><span class="stat__icon">
-            <svg viewBox="0 0 24 24"><path d="M4 7h16v12H4zM9 7V5h6v2"/></svg></span>
-            <div><strong>Open roles</strong><small>Updated live from our recruitment system</small></div>
-          </div>
-          <div class="stat"><span class="stat__icon">
-            <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span>
-            <div><strong>Fair &amp; transparent</strong><small>Every application is reviewed</small></div>
-          </div>
-          <div class="stat"><span class="stat__icon">
-            <svg viewBox="0 0 24 24"><path d="M3 12h4l3 7 4-14 3 7h4"/></svg></span>
-            <div><strong>Grow with us</strong><small>Learning backed by a university</small></div>
-          </div>
-        </div>
+        <h1>Current <em class="accent">vacancies</em></h1>
+        <p class="lead">Join the team taking the University to the People. Select a role to read the full description and apply online.</p>
       </div>
     </section>
 
-    <!-- ============ WHY ============ -->
-    <section class="section" id="why">
+    <section class="jobs" id="openings">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow">Why work with us</p>
-          <h2>A workplace built on expertise, integrity and growth</h2>
-          <p>
-            <!-- EDIT: adjust to your official employer value proposition -->
-            As the commercial arm of Jomo Kenyatta University of Agriculture and Technology,
-            JKUATES offers the stability of an established institution and the pace of a growing business.
-          </p>
-        </div>
-
-        <div class="grid grid--4">
-          <article class="card">
-            <span class="card__icon"><svg viewBox="0 0 24 24"><path d="M4 19V9l8-5 8 5v10M9 19v-6h6v6"/></svg></span>
-            <h3>Strong foundation</h3>
-            <p>Work alongside professionals backed by the resources and reputation of a leading university.</p>
-          </article>
-          <article class="card">
-            <span class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 20V10M6 20V4M18 20v-6"/></svg></span>
-            <h3>Career growth</h3>
-            <p>Structured development, mentorship and exposure to diverse projects and clients.</p>
-          </article>
-          <article class="card">
-            <span class="card__icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.5c3 .2 5.5 2.5 5.5 5.5"/></svg></span>
-            <h3>Collaborative culture</h3>
-            <p>Multidisciplinary teams that share knowledge and support each other to deliver.</p>
-          </article>
-          <article class="card">
-            <span class="card__icon"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span>
-            <h3>Integrity first</h3>
-            <p>Merit-based, transparent recruitment and a commitment to equal opportunity.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ OPEN POSITIONS (ZOHO RECRUIT) ============ -->
-    <section class="section section--tint" id="openings">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow">Open positions</p>
-          <h2>Current opportunities</h2>
-          <p>Select a role to view the full job description and apply securely through our recruitment portal.</p>
-        </div>
-
         <div class="jobs-panel">
           <!--
             ZOHO RECRUIT EMBED
@@ -158,120 +90,77 @@
             <p>We couldn't load the job list here.</p>
             <a class="btn btn--primary" href="https://careers.jkuates.co.ke/jobs/Careers" target="_blank" rel="noopener">
               View all openings on our job portal
+              <span class="btn__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
             </a>
           </div>
         </div>
 
-        <p class="jobs-note">
-          Don't see a suitable role?
-          <a href="https://careers.jkuates.co.ke/jobs/Careers" target="_blank" rel="noopener">Visit the full job portal</a>
-          to set up job alerts.
+      </div>
+    </section>
+
+    <!-- ============ SCREEN 2: HOW TO APPLY ============ -->
+    <section class="section" id="apply">
+      <div class="container">
+        <!-- Guidance adapted from careersolutions.co.ke (JKUATES recruitment platform) -->
+        <h2>Before you <em class="accent">apply</em></h2>
+        <p class="section__intro">A few minutes of preparation can save you time and help you submit a stronger, more complete application.</p>
+        <ol class="steps">
+          <li><span>[01]</span><strong>Read the role carefully</strong>Check the duties, requirements, closing date and application instructions before you begin.</li>
+          <li><span>[02]</span><strong>Prepare your documents</strong>Have your updated CV, certificates and any other requested documents ready to upload.</li>
+          <li><span>[03]</span><strong>Complete all fields</strong>Give accurate details and fill in every mandatory field before you submit.</li>
+          <li><span>[04]</span><strong>Submit before the deadline</strong>Apply early so you have time to resolve any technical or document issue.</li>
+        </ol>
+        <p class="notice">
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>
+          <span>Need help with your application? Email <a href="mailto:recruitment@jkuates.jkuat.ac.ke">recruitment@jkuates.jkuat.ac.ke</a>
+          or call <a href="tel:+254736524200">0736 524200</a>, and mention the role you are applying for.
+          JKUATES never charges candidates any fee at any stage of recruitment.</span>
         </p>
       </div>
     </section>
 
-    <!-- ============ PROCESS ============ -->
-    <section class="section" id="process">
+    <!-- ============ SCREEN 3: CONTACT ============ -->
+    <section class="section section--paper" id="contact">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow">Hiring process</p>
-          <h2>What to expect after you apply</h2>
+        <h2>Get in <em class="accent">touch</em></h2>
+        <div class="contact">
+          <article class="contact__card">
+            <p class="contact__label">For candidates</p>
+            <h3>Questions about a vacancy or your application?</h3>
+            <p>Our recruitment support team will get back to you. Please mention the role you are applying for.</p>
+            <ul class="contact__lines">
+              <li><a href="mailto:recruitment@jkuates.jkuat.ac.ke">recruitment@jkuates.jkuat.ac.ke</a></li>
+              <li><a href="tel:+254736524200">0736 524200</a></li>
+            </ul>
+            <a class="btn btn--primary" href="mailto:recruitment@jkuates.jkuat.ac.ke?subject=Candidate%20enquiry">Email us
+              <span class="btn__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+            </a>
+          </article>
+          <article class="contact__card contact__card--dark">
+            <p class="contact__label">For clients</p>
+            <h3>Need us to recruit for your organisation?</h3>
+            <p>We run recruitment on behalf of clients, from advertising to shortlisting and interviews.</p>
+            <ul class="contact__lines">
+              <li><a href="mailto:recruitment@jkuates.jkuat.ac.ke">recruitment@jkuates.jkuat.ac.ke</a></li>
+              <li><a href="tel:+254736524200">0736 524200</a></li>
+            </ul>
+            <a class="btn btn--light" href="mailto:recruitment@jkuates.jkuat.ac.ke?subject=Recruitment%20services%20enquiry">Make an enquiry
+              <span class="btn__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+            </a>
+          </article>
+          <div class="contact__info">
+            <p><span>Post</span>P.O. Box 62000-00200, Nairobi</p>
+            <p><span>Hours</span>Mon to Fri 8am to 5pm<br>Sat 9am to 1pm</p>
+          </div>
         </div>
-        <ol class="steps">
-          <li class="step">
-            <span class="step__num">01</span>
-            <h3>Apply online</h3>
-            <p>Choose a role, upload your CV and complete the short application form.</p>
-          </li>
-          <li class="step">
-            <span class="step__num">02</span>
-            <h3>Review &amp; shortlisting</h3>
-            <p>Our team assesses every application against the role requirements.</p>
-          </li>
-          <li class="step">
-            <span class="step__num">03</span>
-            <h3>Interviews</h3>
-            <p>Shortlisted candidates are invited for interviews and, where relevant, assessments.</p>
-          </li>
-          <li class="step">
-            <span class="step__num">04</span>
-            <h3>Offer &amp; onboarding</h3>
-            <p>Successful candidates receive an offer and a structured welcome to the team.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ============ FAQ ============ -->
-    <section class="section section--tint" id="faq">
-      <div class="container container--narrow">
-        <div class="section__head">
-          <p class="eyebrow">FAQs</p>
-          <h2>Frequently asked questions</h2>
-        </div>
-        <!-- EDIT: confirm these answers with HR -->
-        <div class="faq">
-          <details>
-            <summary>Do I need to create an account to apply?</summary>
-            <p>You can apply directly from any job posting. You may optionally sign in to track your applications and receive job alerts.</p>
-          </details>
-          <details>
-            <summary>Can I apply for more than one position?</summary>
-            <p>Yes. Apply for every role that matches your qualifications and experience.</p>
-          </details>
-          <details>
-            <summary>How will I know the status of my application?</summary>
-            <p>You will receive an email confirmation when you apply. Shortlisted candidates are contacted directly by our recruitment team.</p>
-          </details>
-          <details>
-            <summary>Does JKUATES charge any fees during recruitment?</summary>
-            <p>No. We never ask candidates for money at any stage of recruitment. Please report any such request.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CTA ============ -->
-    <section class="cta">
-      <div class="container cta__inner">
-        <div>
-          <h2>Ready to take the next step?</h2>
-          <p>Explore our openings and start your application today.</p>
-        </div>
-        <a href="#openings" class="btn btn--accent">See open positions</a>
       </div>
     </section>
   </main>
 
-  <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="container footer__grid">
-      <div>
-        <p class="footer__brand">JKUAT Enterprises Ltd</p>
-        <p>The commercial arm of Jomo Kenyatta University of Agriculture and Technology.</p>
-      </div>
-      <div>
-        <h4>Careers</h4>
-        <a href="#openings">Open positions</a>
-        <a href="#process">Hiring process</a>
-        <a href="#faq">FAQs</a>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <!-- EDIT: point these to the correct pages on the main site -->
-        <a href="https://jkuates.co.ke">Main website</a>
-        <a href="https://jkuates.co.ke/contact">Contact us</a>
-      </div>
-      <div>
-        <h4>Get in touch</h4>
-        <!-- EDIT: replace with official contact details -->
-        <p>Juja, Kenya</p>
-        <a href="mailto:careers@jkuates.co.ke">careers@jkuates.co.ke</a>
-      </div>
-    </div>
-    <div class="container footer__bottom">
-      <span>&copy; <span id="year"></span> JKUAT Enterprises Ltd. All rights reserved.</span>
-      <a href="#top">Back to top &uarr;</a>
+    <div class="container footer__inner">
+      <span>&copy; <span id="year"></span> JKUAT Enterprises Ltd. A state corporation fully owned by JKUAT.</span>
+      <span><a href="https://jkuates.co.ke">jkuates.co.ke</a> <a href="#top">Back to top &uarr;</a></span>
     </div>
   </footer>
 

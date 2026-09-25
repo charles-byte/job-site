@@ -29,8 +29,38 @@ Zoho Recruit ATS                          <- applications, pipelines, emails: un
 | `index.html` | Page content. Search for `EDIT:` comments to find text to confirm. |
 | `assets/css/styles.css` | Design. Brand colours are in `:root` at the top. |
 | `assets/js/main.js` | Zoho widget settings (`ZOHO_CONFIG`), mobile menu, fallback. |
-| `assets/img/` | Add `logo.svg` (or change the `<img>` path to a PNG). |
+| `assets/img/` | Favicon. Put a local copy of the logo here (see step 2). |
 | `zoho/career-site-custom.css` | Paste into Zoho so job detail and apply pages match the new look. |
+
+## Design and brand
+
+The page is deliberately compact (about 2 to 3 screens) and puts vacancies first:
+
+1. **Vacancies:** a short banner, with the Zoho job list overlapping it so jobs show without scrolling.
+2. **How to apply:** four steps in one row plus a no-fees notice.
+3. **Get in touch:** one card for candidates, one for clients who want JKUATES to recruit for them, plus phone, email, address and hours.
+
+The style follows [acalconsulting.co.ke](https://acalconsulting.co.ke): floating white pill header, dark banner, headings with one word in serif italic, off-white sections, `[01]` numbering and pill buttons with a round arrow. Fonts are Inter Tight and Playfair Display (italic accents only).
+
+Colours come from JKUATES, not ACAL:
+
+| Token | Value | Source |
+|---|---|---|
+| `--brand` | `#058036` | Button green already used on the Zoho portal |
+| `--lime` | `#9BCA3E` | Logo ring and jkuates.co.ke menu colour |
+| `--deep` | `#0A2418` | Dark green for hero, CTA and footer (chosen to pair with the above) |
+
+Contact details:
+- Email for everyone: recruitment@jkuates.jkuat.ac.ke
+- Phone for everyone: 0736 524200
+- Postal address and opening hours are from jkuates.co.ke/index.php/contact.php.
+
+The "Before you apply" guidance is adapted from careersolutions.co.ke.
+
+## Verified on 2026-09-25
+
+- The v1.1 Zoho embed widget with `site: https://careers.jkuates.co.ke` loads on this page. The portal had no open jobs, so the widget showed the empty-state message. Job rows could not be checked yet.
+- **Two Zoho portals exist.** jkuates.co.ke links `careers.jkuates.co.ke` as "JKUATES Client Recruitments" and `recruitment.jkuates.co.ke/jobs/Careers` as "Recruitment" in its footer, while internal vacancies sit on jkuates.co.ke/index.php/careers.php. Confirm which portal this page should show before go-live, then set `site` in `ZOHO_CONFIG` and the portal links in `index.html` to match.
 
 ## Steps to go live
 
@@ -40,9 +70,9 @@ Zoho Recruit ATS                          <- applications, pipelines, emails: un
 3. Compare it with the embed block in `index.html` and the `ZOHO_CONFIG` values in `assets/js/main.js` (`site`, `page_name`, `source`). If Zoho's code is different, use Zoho's values.
 
 ### 2. Brand it
-- Add the official logo to `assets/img/logo.svg`.
-- Change the colour tokens at the top of `assets/css/styles.css` (and `zoho/career-site-custom.css`) to the official brand colours.
-- Go through the `EDIT:` comments in `index.html` (contact email, company copy, FAQ answers).
+- The header currently loads the logo from `jkuates.co.ke/index.php/images/logos/logo.png`. Save a local copy (ideally a transparent PNG or SVG from the brand team) to `assets/img/` and update the `<img>` path.
+- If the brand team has official colour values, update the tokens at the top of `assets/css/styles.css` and `zoho/career-site-custom.css`.
+- Go through the `EDIT:` comments in `index.html` (currently just the logo).
 
 ### 3. Style the Zoho-hosted pages
 In Zoho Recruit, open your career site's **Customize / Theme** settings and:

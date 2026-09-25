@@ -4,7 +4,7 @@ var ZOHO_CONFIG = {
   page_name: "Careers",
   source: "CareerSite",
   site: "https://careers.jkuates.co.ke",
-  brand_color: "#0B6B3A",
+  brand_color: "#058036",
   empty_job_msg: "There are no open positions right now. Please check back soon."
 };
 
@@ -14,7 +14,8 @@ var ZOHO_CONFIG = {
   var target = document.getElementById(ZOHO_CONFIG.widget_id);
 
   function showFallback() {
-    if (fallback && target && !target.children.length) fallback.hidden = false;
+    // Zoho's "no jobs" message is a bare text node, so check text as well as elements
+    if (fallback && target && !target.children.length && !target.textContent.trim()) fallback.hidden = false;
   }
 
   if (window.rec_embed_js && typeof window.rec_embed_js.load === "function") {

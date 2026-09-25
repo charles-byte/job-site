@@ -7,37 +7,38 @@
 
    It only changes look and feel (fonts, colours, spacing, rounded corners).
    It does not hide or move form fields, so applications keep working.
-   Zoho's class names can change between releases: after pasting, check the
-   job list, a job detail page and the apply form, and adjust selectors if needed.
+
+   Selectors marked VERIFIED were checked against the live portal markup on
+   2026-09-25. The portal had no open jobs that day, so job rows, the job
+   detail page and the apply form could not be checked: those rules are marked
+   UNVERIFIED. Recheck them once a job is published.
    ========================================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap");
 
 :root {
-  --jk-brand: #0B6B3A;
-  --jk-brand-dark: #07472A;
-  --jk-accent: #E0A526;
-  --jk-ink: #14211B;
-  --jk-line: #E3E8E5;
-  --jk-tint: #F4F7F5;
+  --jk-brand: #058036;      /* same green Zoho already uses for this portal */
+  --jk-brand-dark: #04652A;
+  --jk-lime: #9BCA3E;
+  --jk-ink: #06140D;
+  --jk-line: #E4E6E1;
+  --jk-paper: #F7F7F4;
 }
 
-body, body * {
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
+/* Fonts. Icon fonts (Font Awesome .fa, Lyte icons) are left alone. VERIFIED */
+body, .font-lato, .font-lato :not(.fa):not([class*="icon"]):not([class*="Icon"]) {
+  font-family: "Inter Tight", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
 }
 
-body { background: var(--jk-tint) !important; color: #45534C; }
+/* Job list section. VERIFIED */
+.cw-job-listing { background: var(--jk-paper) !important; }
+.cw-job-listing h1, .cw-job-listing h2, .cw-job-listing h3,
+.cw-job-listing h4 { color: var(--jk-ink) !important; letter-spacing: -.02em; }
+.cw-job-listing a:not(.button) { color: var(--jk-brand) !important; }
+.cw-job-listing a:not(.button):hover { color: var(--jk-brand-dark) !important; }
 
-h1, h2, h3, h4 { color: var(--jk-ink) !important; letter-spacing: -.01em; }
-
-a { color: var(--jk-brand) !important; }
-a:hover { color: var(--jk-brand-dark) !important; }
-
-/* Buttons (Apply, Search, Submit) */
-button,
-input[type="submit"],
-input[type="button"],
-.btn, .button, [class*="apply"] button, [class*="Apply"] {
+/* Buttons: banner "View Openings", "Search". VERIFIED */
+a.button, .lyte-button.lyteBackgroundColorBtn, .cw-joblist-btn {
   background: var(--jk-brand) !important;
   border-color: var(--jk-brand) !important;
   color: #fff !important;
@@ -45,29 +46,27 @@ input[type="button"],
   font-weight: 600 !important;
   transition: background .2s ease;
 }
-button:hover,
-input[type="submit"]:hover,
-.btn:hover, .button:hover { background: var(--jk-brand-dark) !important; }
-
-/* Form fields */
-input[type="text"], input[type="email"], input[type="tel"], input[type="search"],
-select, textarea {
-  border: 1px solid var(--jk-line) !important;
-  border-radius: 10px !important;
-  padding: 10px 12px !important;
+a.button:hover, .lyte-button.lyteBackgroundColorBtn:hover, .cw-joblist-btn:hover {
+  background: var(--jk-brand-dark) !important;
 }
-input:focus, select:focus, textarea:focus {
+
+/* Search fields. VERIFIED (class names); UNVERIFIED on the apply form */
+.cw-job-listing .lyteField input, .cw-job-listing input[type="text"],
+.cw-job-listing select, .cw-job-listing textarea {
+  border: 1px solid var(--jk-line) !important;
+  border-radius: 12px !important;
+}
+.cw-job-listing input:focus, .cw-job-listing select:focus, .cw-job-listing textarea:focus {
   outline: none !important;
   border-color: var(--jk-brand) !important;
-  box-shadow: 0 0 0 3px rgba(11, 107, 58, .15) !important;
+  box-shadow: 0 0 0 3px rgba(5, 128, 54, .15) !important;
 }
 
-/* Job cards / list rows: rounded, soft shadow */
-[class*="job-list"] li, [class*="jobList"] li, [class*="job_list"] li,
-[class*="job-card"], [class*="jobCard"] {
+/* Job rows as rounded cards. UNVERIFIED: no jobs were live to inspect */
+.careers-search-results li,
+.cw-joblisting-results li {
   background: #fff !important;
   border: 1px solid var(--jk-line) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 6px 18px rgba(6, 47, 29, .06);
+  border-radius: 16px !important;
   margin-bottom: 12px !important;
 }
