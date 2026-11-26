@@ -67,16 +67,17 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 .btn--light .btn__arrow { background: var(--brand); color: var(--white); }
 .btn--light:hover { color: var(--ink); box-shadow: 0 10px 30px rgba(0,0,0,.25); }
 
-/* Header: floating white pill */
-.header { position: fixed; top: 14px; left: 0; right: 0; z-index: 50; pointer-events: none; }
-.header__inner {
-  pointer-events: auto; position: relative;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  height: 64px; padding: 0 10px 0 18px;
-  background: var(--white); border-radius: 18px;
-  box-shadow: 0 1px 2px rgba(6,20,13,.06); transition: box-shadow .25s ease;
+/* Header: full-width white bar, pinned to the top */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line); transition: box-shadow .25s ease;
 }
-.header.is-scrolled .header__inner { box-shadow: 0 12px 34px rgba(6,20,13,.12); }
+.header.is-scrolled { box-shadow: 0 10px 30px rgba(6,20,13,.08); }
+.header__inner {
+  position: relative; height: 76px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
 .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); }
 .brand:hover { color: var(--ink); }
 /* The official logo has a light grey background; multiply blends it into the white bar */
@@ -107,7 +108,7 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   background: repeating-radial-gradient(ellipse 60% 48% at 72% 30%, transparent 0 34px, rgba(255,255,255,.05) 34px 36px);
   mask-image: radial-gradient(70% 70% at 70% 40%, #000 30%, transparent 85%);
 }
-.hero__inner { position: relative; padding-top: 136px; padding-bottom: 120px; }
+.hero__inner { position: relative; padding-top: 72px; padding-bottom: 120px; }
 .hero h1 { color: var(--white); margin-bottom: 12px; }
 .hero h1 em.accent { color: var(--lime); }
 .lead { font-size: 1.1rem; color: rgba(255,255,255,.8); max-width: 600px; margin: 0; }
@@ -123,15 +124,74 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 /* Light-touch overrides so Zoho's embedded list matches the site.
    Only visual properties are changed; Zoho's markup and behaviour are untouched. */
 .embed_jobs_head, .embed_jobs_head * { font-family: var(--font) !important; }
-.embed_jobs_head a { color: var(--ink) !important; }
-.embed_jobs_head a:hover { color: var(--brand) !important; }
-.embed_jobs_head input,
-.embed_jobs_head select { border-radius: 12px !important; border-color: var(--line) !important; min-height: 44px; }
-.embed_jobs_head button,
-.embed_jobs_head .rec_apply_btn {
-  background: var(--brand) !important; border-color: var(--brand) !important;
-  color: var(--white) !important; border-radius: 999px !important;
+
+/* Let the list fill the panel: drop Zoho's narrow wrappers and grey box */
+.embed_jobs_head, .embed_jobs_head2, .embed_jobs_head3 {
+  width: 100% !important; max-width: none !important;
+  margin: 0 !important; padding: 0 !important;
+  background: transparent !important; box-shadow: none !important; border: 0 !important;
 }
+/* Hide Zoho's filter column while it has no filters in it */
+.rec_filter_cls:not(:has(*)) { display: none !important; }
+#rec_job_listing_div { width: 100% !important; gap: 24px; }
+.rec_job_listing_div_jobs { flex: 1 1 auto !important; width: auto !important; min-width: 0; }
+.rec-group { margin: 0 !important; padding: 0 !important; }
+
+/* Search: one full-width row */
+.embed_jobs_head .rec-what-where {
+  display: flex !important; gap: 12px; width: 100% !important;
+  margin: 0 0 24px !important; padding: 0 !important;
+}
+.embed_jobs_head .rec-what-where input {
+  flex: 1 1 0; width: auto !important; min-height: 50px; margin: 0 !important;
+  padding: 0 18px !important; font-size: .95rem !important;
+  background: var(--paper) !important; border: 1px solid var(--line) !important;
+  border-radius: 12px !important; color: var(--ink) !important;
+}
+.embed_jobs_head .rec-what-where input:focus { outline: 2px solid var(--brand); outline-offset: 1px; background: var(--white) !important; }
+.embed_jobs_head .rec-what-where .searchButton {
+  flex: 0 0 auto; padding: 0 32px !important; cursor: pointer;
+  background: var(--brand) !important; border-color: var(--brand) !important;
+  color: var(--white) !important; border-radius: 999px !important; font-weight: 600 !important;
+}
+.embed_jobs_head .rec-what-where .searchButton:hover { background: var(--brand-dark) !important; }
+
+/* Each job: a full-width card; the whole card opens the job */
+.embed_jobs_head ul.rec-job-info {
+  position: relative; display: flex !important; justify-content: space-between; align-items: flex-start; gap: 32px;
+  width: 100% !important; margin: 0 0 14px !important; padding: 24px 28px !important;
+  background: var(--white) !important; border: 1px solid var(--line) !important; border-radius: var(--radius) !important;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.embed_jobs_head ul.rec-job-info:last-child { margin-bottom: 0 !important; }
+.embed_jobs_head ul.rec-job-info:hover { border-color: var(--brand) !important; box-shadow: 0 10px 28px rgba(6,20,13,.08); }
+.embed_jobs_head .zr_fillayout_info { flex: 1 1 auto !important; width: auto !important; min-width: 0; max-width: 780px; }
+.embed_jobs_head .zr_fillayout_info li { width: auto !important; max-width: none !important; }
+.embed_jobs_head .rec-job-title { margin-bottom: 6px !important; }
+.embed_jobs_head .rec-job-title a {
+  color: var(--ink) !important; font-size: 1.25rem !important; font-weight: 600 !important;
+  letter-spacing: -.015em; line-height: 1.3 !important;
+}
+.embed_jobs_head .rec-job-title a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.embed_jobs_head ul.rec-job-info:hover .rec-job-title a { color: var(--brand) !important; }
+.embed_jobs_head .zrsite_Location { color: var(--muted) !important; font-size: .92rem !important; margin-bottom: 10px !important; }
+.embed_jobs_head li.zrsite_Job_Description { color: var(--text) !important; font-size: .95rem !important; line-height: 1.6 !important; }
+/* Job type and date: right-hand column, with an arrow pointing to the job */
+.embed_jobs_head li.zrsite_Date_Opened {
+  flex: 0 0 auto !important; width: auto !important;
+  display: flex !important; flex-direction: column-reverse !important; align-items: flex-end !important; gap: 6px;
+}
+.embed_jobs_head li.zrsite_Date_Opened::after {
+  content: "\2197"; order: -1; display: grid; place-items: center; margin-top: 10px;
+  width: 38px; height: 38px; border-radius: 50%; background: var(--brand); color: var(--white); font-size: 1rem;
+  transition: transform .25s ease;
+}
+.embed_jobs_head ul.rec-job-info:hover li.zrsite_Date_Opened::after { transform: rotate(45deg); }
+.embed_jobs_head span.zrsite_Job_Type {
+  padding: 4px 12px; border-radius: 999px; background: var(--lime-soft);
+  color: var(--brand-dark) !important; font-size: .8rem !important; font-weight: 600 !important; white-space: nowrap;
+}
+.embed_jobs_head span.zrsite_Date_Opened { color: var(--muted) !important; font-size: .82rem !important; }
 
 /* Sections */
 .section { padding: 88px 0; }
@@ -189,8 +249,8 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 @media (max-width: 960px) {
   .nav-toggle { display: grid; }
   .nav {
-    position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
-    background: var(--white); border-radius: 18px; padding: 12px 20px 20px;
+    position: absolute; top: 77px; left: -24px; right: -24px; flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--white); border-radius: 0 0 18px 18px; padding: 12px 24px 20px;
     display: none; box-shadow: 0 20px 40px rgba(6,20,13,.15);
   }
   .nav.is-open { display: flex; }
@@ -204,11 +264,18 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 @media (max-width: 600px) {
   body { font-size: 16px; }
   .container { padding: 0 16px; }
-  .header { top: 10px; }
+  .header__inner { height: 68px; }
+  .nav { top: 69px; left: -16px; right: -16px; padding: 12px 16px 20px; }
   .brand__text { display: none; }
-  .hero__inner { padding-top: 110px; padding-bottom: 96px; }
+  .hero__inner { padding-top: 56px; padding-bottom: 96px; }
   .jobs { margin-top: -64px; }
   .jobs-panel { padding: 18px; min-height: 260px; }
+  .embed_jobs_head .rec-what-where { flex-wrap: wrap; gap: 10px; margin-bottom: 16px !important; }
+  .embed_jobs_head .rec-what-where input { flex: 1 1 100%; min-height: 46px; }
+  .embed_jobs_head ul.rec-job-info { flex-direction: column; gap: 14px; padding: 20px !important; }
+  .embed_jobs_head li.zrsite_Date_Opened { flex-direction: row-reverse !important; align-items: center !important; gap: 12px; width: 100% !important; justify-content: flex-end; }
+  .embed_jobs_head li.zrsite_Date_Opened::after { margin: 0 0 0 auto; width: 34px; height: 34px; }
+  .embed_jobs_head .rec-job-title a { font-size: 1.1rem !important; }
   .section { padding: 64px 0; }
   h2 { margin-bottom: 20px; }
   .steps { column-gap: 16px; row-gap: 12px; }
