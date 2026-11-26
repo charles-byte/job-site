@@ -8,6 +8,13 @@ var ZOHO_CONFIG = {
   empty_job_msg: "There are no open positions right now. Please check back soon."
 };
 
+// Order of the date parts Zoho sends, which follows the date format set in Zoho Recruit.
+// "MDY" for 11/20/2026, "DMY" for 20/11/2026. Change this if Zoho's date format changes.
+var ZOHO_DATE_ORDER = "MDY";
+
+// API name of the Zoho field shown as "Deadline" on each job card
+var ZOHO_DEADLINE_FIELD = "Target_Date";
+
 (function () {
   // Load Zoho job listings, or show a link to the Zoho portal if the widget is unavailable.
   var fallback = document.getElementById("jobs-fallback");
@@ -37,7 +44,7 @@ var ZOHO_CONFIG = {
 
     fetch(feed).then(function (r) { return r.json(); }).then(function (res) {
       deadlines = {};
-      (res.data || []).forEach(function (job) { deadlines[job.id] = job.Target_Date; });
+      (res.data || []).forEach(function (job) { deadlines[job.id] = job[ZOHO_DEADLINE_FIELD]; });
       applyDeadlines(target, deadlines);
     }).catch(function () { deadlines = {}; applyDeadlines(target, deadlines); });
 
@@ -62,12 +69,15 @@ var ZOHO_CONFIG = {
     });
   }
 
-  // Zoho sends dates as MM/DD/YYYY; show them as "20 Dec 2026" so they can't be misread
+  // Show Zoho's numeric dates as "20 Dec 2026" so they can't be misread
   function formatDate(value) {
-    var m = String(value).match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    var m = String(value).match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
     if (!m) return value;
+    var day = Number(ZOHO_DATE_ORDER === "DMY" ? m[1] : m[2]);
+    var month = Number(ZOHO_DATE_ORDER === "DMY" ? m[2] : m[1]);
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return Number(m[2]) + " " + months[Number(m[1]) - 1] + " " + m[3];
+    if (month < 1 || month > 12 || day < 1 || day > 31) return value;
+    return day + " " + months[month - 1] + " " + m[3];
   }
   // Mobile navigation
   var toggle = document.querySelector(".nav-toggle");
