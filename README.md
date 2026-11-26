@@ -51,7 +51,7 @@ Colours come from JKUATES, not ACAL:
 | `--deep` | `#0A2418` | Dark green for hero, CTA and footer (chosen to pair with the above) |
 
 Contact details:
-- Email for everyone: recruitment@jkuates.jkuat.ac.ke
+- Email: candidates recruitment@jkuates.jkuat.ac.ke; clients consultancy@jkuates.jkuat.ac.ke
 - Phone for everyone: 0736 524200
 - Postal address and opening hours are from jkuates.co.ke/index.php/contact.php.
 
