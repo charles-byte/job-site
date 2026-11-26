@@ -60,7 +60,7 @@ The "Before you apply" guidance is adapted from careersolutions.co.ke.
 ## Verified on 2026-09-25
 
 - The v1.1 Zoho embed widget with `site: https://careers.jkuates.co.ke` loads on this page. The portal had no open jobs, so the widget showed the empty-state message. Job rows could not be checked yet.
-- **Two Zoho portals exist.** jkuates.co.ke links `careers.jkuates.co.ke` as "JKUATES Client Recruitments" and `recruitment.jkuates.co.ke/jobs/Careers` as "Recruitment" in its footer, while internal vacancies sit on jkuates.co.ke/index.php/careers.php. Confirm which portal this page should show before go-live, then set `site` in `ZOHO_CONFIG` and the portal links in `index.html` to match.
+- **Zoho answers on two addresses** (checked 2026-11-26). Both `careers.jkuates.co.ke` and `recruitment.jkuates.co.ke` are DNS CNAMEs to Zoho (`recruit.cs.zohohost.com`) and serve the same Zoho career site. jkuates.co.ke links `careers.jkuates.co.ke` as "JKUATES Client Recruitments" and `recruitment.jkuates.co.ke/jobs/Careers` as "Recruitment" in its footer. Do not repoint either of them while they are in use.
 
 ## Steps to go live
 
@@ -81,14 +81,14 @@ In Zoho Recruit, open your career site's **Customize / Theme** settings and:
 - Point the header/menu links back to the new careers page and the main website.
 - Preview the job list, a job detail page and the application form, then submit a test application to confirm it arrives in Zoho.
 
-### 4. Hosting: `recruitment.jkuates.co.ke` on the jkuates.co.ke cPanel
-The page lives at **`recruitment.jkuates.co.ke`**, a subdomain on the jkuates.co.ke cPanel hosting.
+### 4. Hosting: `apply.jkuates.co.ke` on the jkuates.co.ke cPanel
+The page lives at **`apply.jkuates.co.ke`**, a subdomain on the jkuates.co.ke cPanel hosting.
 Every push to `claude/tender-ptolemy-gt93ih` uploads changed files there through
 `.github/workflows/deploy-cpanel.yml` (FTPS). One-time setup:
 
-1. cPanel > Domains: create `recruitment.jkuates.co.ke` and note its folder
-   (e.g. `public_html/recruitment.jkuates.co.ke`). If DNS is managed outside this cPanel,
-   add an A record for `recruitment` pointing to the server's IP. Only this new record is added.
+1. cPanel > Domains: create `apply.jkuates.co.ke` and note its folder
+   (e.g. `public_html/apply.jkuates.co.ke`). If DNS is managed outside this cPanel,
+   add an A record for `apply` pointing to the server's IP (102.130.123.19). Only this new record is added.
 2. cPanel > FTP Accounts: create an account whose **Directory** is that folder.
 3. GitHub > Settings > Secrets and variables > Actions: add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
 4. cPanel > SSL/TLS Status: run AutoSSL for the subdomain so it loads over https.
@@ -96,6 +96,24 @@ Every push to `claude/tender-ptolemy-gt93ih` uploads changed files there through
 **Do not touch `careers.jkuates.co.ke`.** It is Zoho's live career site and application form.
 This page only *reads* the public job list from it; no DNS record, Zoho setting or link
 for `careers.jkuates.co.ke` needs to change.
+
+### 4b. Later: move this page to `careers.jkuates.co.ke`
+Do this only when no recruitment is open on Zoho (e.g. after the CBK internship closes),
+because it changes where `careers.jkuates.co.ke` points. Zoho keeps running on
+`recruitment.jkuates.co.ke`, which already serves the same Zoho career site.
+
+1. **Zoho:** in the career site's custom domain settings, make `recruitment.jkuates.co.ke`
+   the main domain and remove `careers.jkuates.co.ke`. Open a job on
+   `recruitment.jkuates.co.ke` and submit a test application to confirm it works.
+2. **Site code:** set `site` in `ZOHO_CONFIG` (`assets/js/main.js`) and the portal link in
+   `index.html` to `https://recruitment.jkuates.co.ke`; set canonical/og:url to
+   `https://careers.jkuates.co.ke/`. Add an `.htaccess` that redirects `/jobs/...` to
+   `https://recruitment.jkuates.co.ke/jobs/...`, so old Zoho job links on job boards and in
+   emails still reach the job.
+3. **Deploy:** point the FTP account (or a second workflow target) at the
+   `careers.jkuates.co.ke` folder in cPanel (it already exists: `/careers.jkuates.co.ke`).
+4. **DNS (last):** change `careers` from the Zoho CNAME to an A record for 102.130.123.19,
+   then run AutoSSL for it. Make `apply.jkuates.co.ke` redirect to `careers.jkuates.co.ke`.
 
 ### 5. Test before announcing
 - Page loads on desktop and mobile.
