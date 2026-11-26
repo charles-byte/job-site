@@ -81,14 +81,21 @@ In Zoho Recruit, open your career site's **Customize / Theme** settings and:
 - Point the header/menu links back to the new careers page and the main website.
 - Preview the job list, a job detail page and the application form, then submit a test application to confirm it arrives in Zoho.
 
-### 4. Host the page (pick one)
-| Option | Effort | Notes |
-|---|---|---|
-| **A. `jkuates.co.ke/careers`** on the existing website | Low | Upload `index.html` and `assets/` to a `/careers` folder, or paste the sections into a CMS page. Keep `careers.jkuates.co.ke` pointing to Zoho. **Recommended.** |
-| **B. New subdomain**, e.g. `jobs.jkuates.co.ke`, on GitHub Pages / Netlify / Vercel (free) | Low | Add a CNAME record for the new subdomain only. Zoho's DNS is not touched. |
-| **C. Take over `careers.jkuates.co.ke`** | Medium | First move Zoho to another subdomain in Zoho's custom domain settings, update the Zoho CNAME, then update `site` in `ZOHO_CONFIG` and all portal links. Do this only after A or B is tested, because it changes live application links. |
+### 4. Hosting: `recruitment.jkuates.co.ke` on the jkuates.co.ke cPanel
+The page lives at **`recruitment.jkuates.co.ke`**, a subdomain on the jkuates.co.ke cPanel hosting.
+Every push to `claude/tender-ptolemy-gt93ih` uploads changed files there through
+`.github/workflows/deploy-cpanel.yml` (FTPS). One-time setup:
 
-**Important:** do not change the existing `careers.jkuates.co.ke` DNS record unless you are doing option C. That record is what keeps the Zoho portal working.
+1. cPanel > Domains: create `recruitment.jkuates.co.ke` and note its folder
+   (e.g. `public_html/recruitment.jkuates.co.ke`). If DNS is managed outside this cPanel,
+   add an A record for `recruitment` pointing to the server's IP. Only this new record is added.
+2. cPanel > FTP Accounts: create an account whose **Directory** is that folder.
+3. GitHub > Settings > Secrets and variables > Actions: add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
+4. cPanel > SSL/TLS Status: run AutoSSL for the subdomain so it loads over https.
+
+**Do not touch `careers.jkuates.co.ke`.** It is Zoho's live career site and application form.
+This page only *reads* the public job list from it; no DNS record, Zoho setting or link
+for `careers.jkuates.co.ke` needs to change.
 
 ### 5. Test before announcing
 - Page loads on desktop and mobile.

@@ -4,10 +4,10 @@
 #
 # One-time setup:
 #  1. cPanel > FTP Accounts: create an account whose Directory is the subdomain's
-#     folder (for example public_html/apply.jkuates.co.ke).
+#     folder (for example public_html/recruitment.jkuates.co.ke).
 #  2. GitHub > this repo > Settings > Secrets and variables > Actions > New repository secret:
 #       FTP_SERVER    the FTP host, for example ftp.jkuates.co.ke
-#       FTP_USERNAME  the full FTP username, for example deploy@apply.jkuates.co.ke
+#       FTP_USERNAME  the full FTP username, for example deploy@recruitment.jkuates.co.ke
 #       FTP_PASSWORD  that account's password
 #
 # Only changed files are uploaded. README.md, the zoho/ notes and the git files stay out.
