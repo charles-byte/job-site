@@ -86,15 +86,34 @@ In Zoho Recruit, open your career site's **Customize / Theme** settings and:
 
 ### 4. Hosting: `apply.jkuates.co.ke` on the jkuates.co.ke cPanel
 The page lives at **`apply.jkuates.co.ke`**, a subdomain on the jkuates.co.ke cPanel hosting.
-Every push to `claude/tender-ptolemy-gt93ih` uploads changed files there through
-`.github/workflows/deploy-cpanel.yml` (FTPS). One-time setup:
+cPanel pulls the site from this (public) GitHub repo every 10 minutes and copies
+`index.html` and `assets/` into the subdomain's folder. No FTP account or password is
+needed (the hosting plan allows only one FTP account, used by e-learning). To publish a
+change: commit and push to `claude/tender-ptolemy-gt93ih`, then wait up to 10 minutes.
 
-1. cPanel > Domains: create `apply.jkuates.co.ke` and note its folder
-   (e.g. `public_html/apply.jkuates.co.ke`). If DNS is managed outside this cPanel,
-   add an A record for `apply` pointing to the server's IP (102.130.123.19). Only this new record is added.
-2. cPanel > FTP Accounts: create an account whose **Directory** is that folder.
-3. GitHub > Settings > Secrets and variables > Actions: add `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
-4. cPanel > SSL/TLS Status: run AutoSSL for the subdomain so it loads over https.
+One-time setup:
+
+1. **cPanel > Domains > Create A New Domain:** `apply.jkuates.co.ke`. Note its Document Root
+   (expected: `/apply.jkuates.co.ke`, i.e. `~/apply.jkuates.co.ke`). If DNS is managed outside
+   this cPanel, add an A record for `apply` pointing to 102.130.123.19. Only this new record is added.
+2. **cPanel > Git Version Control > Create:** turn on "Clone a Repository".
+   - Clone URL: `https://github.com/charles-byte/job-site.git`
+   - Repository Path: `repositories/job-site`
+   - Repository Name: `job-site`
+3. **cPanel > Cron Jobs > Add New Cron Job:** Common Settings "Once Per Ten Minutes"
+   (`*/10 * * * *`), Command (one line):
+
+   ```sh
+   (cd "$HOME/repositories/job-site" && git fetch -q origin && git reset -q --hard origin/claude/tender-ptolemy-gt93ih && cp -f index.html "$HOME/apply.jkuates.co.ke/" && cp -Rf assets "$HOME/apply.jkuates.co.ke/") >> "$HOME/apply-deploy.log" 2>&1
+   ```
+
+   If step 1 gave a different Document Root, change both `$HOME/apply.jkuates.co.ke/` parts to it.
+   Errors (if any) are written to `~/apply-deploy.log`; it stays empty when all is well.
+4. **cPanel > SSL/TLS Status:** run AutoSSL for the subdomain so it loads over https.
+
+Notes: only `index.html` and `assets/` are copied, so the README, `zoho/` notes and git files
+are never public. Files deleted from the repo are not deleted from the server; remove them
+in File Manager if needed.
 
 **Do not touch `careers.jkuates.co.ke`.** It is Zoho's live career site and application form.
 This page only *reads* the public job list from it; no DNS record, Zoho setting or link
@@ -113,8 +132,9 @@ because it changes where `careers.jkuates.co.ke` points. The Zoho career site no
    `index.html` to the new Zoho address; set canonical/og:url to
    `https://careers.jkuates.co.ke/`. Add an `.htaccess` that redirects `/jobs/...` to the
    new Zoho address, so old Zoho job links on job boards and in emails still reach the job.
-3. **Deploy:** point the FTP account (or a second workflow target) at the
-   `careers.jkuates.co.ke` folder in cPanel (it already exists: `/careers.jkuates.co.ke`).
+3. **Deploy:** change the cron command's destination from `apply.jkuates.co.ke` to the
+   `careers.jkuates.co.ke` folder in cPanel (it already exists: `/careers.jkuates.co.ke`),
+   and copy `.htaccess` as well.
 4. **DNS (last):** change `careers` from the Zoho CNAME to an A record for 102.130.123.19,
    then run AutoSSL for it. Make `apply.jkuates.co.ke` redirect to `careers.jkuates.co.ke`.
 
