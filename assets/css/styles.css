@@ -191,7 +191,7 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   padding: 4px 12px; border-radius: 999px; background: var(--lime-soft);
   color: var(--brand-dark) !important; font-size: .8rem !important; font-weight: 600 !important; white-space: nowrap;
 }
-.embed_jobs_head span.zrsite_Date_Opened { color: var(--muted) !important; font-size: .82rem !important; }
+.embed_jobs_head span.zrsite_Date_Opened { color: var(--ink) !important; font-size: .82rem !important; font-weight: 600 !important; white-space: nowrap; }
 
 /* Sections */
 .section { padding: 88px 0; }
