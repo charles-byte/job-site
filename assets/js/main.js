@@ -9,8 +9,9 @@ var ZOHO_CONFIG = {
 };
 
 // Order of the date parts Zoho sends, which follows the date format set in Zoho Recruit.
-// "MDY" for 11/20/2026, "DMY" for 20/11/2026. Change this if Zoho's date format changes.
-var ZOHO_DATE_ORDER = "MDY";
+// "DMY" for 20/11/2026, "MDY" for 11/20/2026. The page also checks the dates Zoho sends
+// and switches automatically if one can only be read the other way (e.g. 20/11).
+var ZOHO_DATE_ORDER = "DMY";
 
 // API name of the Zoho field shown as "Deadline" on each job card
 var ZOHO_DEADLINE_FIELD = "Target_Date";
@@ -46,7 +47,10 @@ var ZOHO_DEADLINE_FIELD = "Target_Date";
 
     fetch(feed).then(function (r) { return r.json(); }).then(function (res) {
       deadlines = {};
-      (res.data || []).forEach(function (job) { deadlines[job.id] = job[ZOHO_DEADLINE_FIELD]; });
+      (res.data || []).forEach(function (job) {
+        deadlines[job.id] = job[ZOHO_DEADLINE_FIELD];
+        detectDateOrder([job[ZOHO_DEADLINE_FIELD], job.Date_Opened]);
+      });
       applyDeadlines(target, deadlines);
     }).catch(function () { deadlines = {}; applyDeadlines(target, deadlines); });
 
@@ -68,6 +72,16 @@ var ZOHO_DEADLINE_FIELD = "Target_Date";
       } else {
         span.style.display = "none";
       }
+    });
+  }
+
+  // A date like 20/11/2026 can only be day-first, and 11/20/2026 only month-first
+  function detectDateOrder(values) {
+    values.forEach(function (value) {
+      var m = String(value).match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
+      if (!m) return;
+      if (Number(m[1]) > 12) ZOHO_DATE_ORDER = "DMY";
+      else if (Number(m[2]) > 12) ZOHO_DATE_ORDER = "MDY";
     });
   }
 
