@@ -40,7 +40,9 @@ var ZOHO_DEADLINE_FIELD = "Target_Date";
     if (!target || !window.fetch || !window.MutationObserver) return;
     var deadlines = null;
     var feed = ZOHO_CONFIG.site + "/recruit/v2/public/Job_Openings?pagename=" +
-      encodeURIComponent(ZOHO_CONFIG.page_name) + "&source=" + encodeURIComponent(ZOHO_CONFIG.source);
+      encodeURIComponent(ZOHO_CONFIG.page_name) + "&source=" + encodeURIComponent(ZOHO_CONFIG.source) +
+      // Zoho only returns extra fields that are asked for by name
+      "&extra_fields=" + encodeURIComponent(JSON.stringify([ZOHO_DEADLINE_FIELD]));
 
     fetch(feed).then(function (r) { return r.json(); }).then(function (res) {
       deadlines = {};
