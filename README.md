@@ -53,7 +53,7 @@ Colours come from JKUATES, not ACAL:
 Contact details:
 - Email: candidates recruitment@jkuates.jkuat.ac.ke; clients consultancy@jkuates.jkuat.ac.ke
 - Phone for everyone: 0736 524200
-- Postal address and opening hours are from jkuates.co.ke/index.php/contact.php.
+- Address: JKUAT Main Campus, Juja. Hours: Mon to Fri 8am to 5pm (no Saturdays).
 
 The "Before you apply" guidance is adapted from careersolutions.co.ke.
 
