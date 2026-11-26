@@ -62,7 +62,7 @@ The "Before you apply" guidance is adapted from careersolutions.co.ke.
 - The v1.1 Zoho embed widget with `site: https://careers.jkuates.co.ke` loads on this page. The portal had no open jobs, so the widget showed the empty-state message. Job rows could not be checked yet.
 - **Two separate Zoho career sites** (checked 2026-11-26). `careers.jkuates.co.ke` and `recruitment.jkuates.co.ke` are both DNS CNAMEs to Zoho's shared host (`recruit.cs.zohohost.com`), but they are **different career sites**:
   - `careers.jkuates.co.ke`: "JKUATES Recruitment Portal", green brand, carries the live jobs (e.g. CBK internship). **This is the site this page shows.** Linked from jkuates.co.ke as "JKUATES Client Recruitments".
-  - `recruitment.jkuates.co.ke`: "Exciting Career Opportunities", Zoho's default purple, no jobs published. Linked from the jkuates.co.ke footer as "Recruitment".
+  - `recruitment.jkuates.co.ke`: "Exciting Career Opportunities", Zoho's default purple, no jobs published. Linked from the jkuates.co.ke footer as "Recruitment". This is an older, separate Zoho Recruit account set up by a consultant before JKUATES had its own; it will be deleted or repurposed. Once it is retired, `recruitment.jkuates.co.ke` is free to reuse (e.g. as the new Zoho address in step 4b), and the jkuates.co.ke footer link should be updated.
   Do not repoint either of them.
 
 ## Steps to go live
