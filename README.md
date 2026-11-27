@@ -104,10 +104,11 @@ One-time setup:
    (`*/10 * * * *`), Command (one line):
 
    ```sh
-   (cd "$HOME/repositories/job-site" && old=$(git rev-parse HEAD) && git fetch -q origin && git reset -q --hard origin/claude/tender-ptolemy-gt93ih && cp -f index.html "$HOME/apply.jkuates.co.ke/" && cp -Rf assets "$HOME/apply.jkuates.co.ke/" && if [ "$old" != "$(git rev-parse HEAD)" ]; then uapi NginxCaching clear_cache > /dev/null && date "+%F %T deployed $(git rev-parse --short HEAD), cache cleared"; fi) >> "$HOME/apply-deploy.log" 2>&1
+   (cd "$HOME/repositories/job-site" && old=$(git rev-parse HEAD) && git fetch -q origin && git reset -q --hard origin/claude/tender-ptolemy-gt93ih && cp -f index.html "$HOME/apply.jkuates.co.ke/" && cp -Rf assets "$HOME/apply.jkuates.co.ke/" && if [ "$old" != "$(git rev-parse HEAD)" ]; then uapi NginxCaching clear_cache > /dev/null && echo "$(date) deployed $(git rev-parse --short HEAD), cache cleared"; fi) >> "$HOME/apply-deploy.log" 2>&1
    ```
 
    If step 1 gave a different Document Root, change both `$HOME/apply.jkuates.co.ke/` parts to it.
+   Never put a `%` in the command: cron cuts the command off at the first `%`, so the whole job fails silently.
    The server has an NGINX cache in front of the site that keeps serving the old page after
    new files are copied. The command therefore clears that cache, but only when a new commit
    arrived. `~/apply-deploy.log` gets one "deployed ..., cache cleared" line per new commit,
