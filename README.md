@@ -38,7 +38,10 @@ The page is deliberately compact (about 2 to 3 screens) and puts vacancies first
 
 1. **Vacancies:** a short banner, with the Zoho job list overlapping it so jobs show without scrolling.
 2. **How to apply:** four steps in one row plus a no-fees notice.
-3. **Get in touch:** one card for candidates, one for clients who want JKUATES to recruit for them, plus phone, email, address and hours.
+3. **Get in touch:** one card for candidates (email and phone), with the address and hours beside it.
+
+The page is for candidates only. It has no client enquiry section or client contact
+(consultancy@ was removed on advice, 2026-11-27).
 
 The style follows [acalconsulting.co.ke](https://acalconsulting.co.ke): floating white pill header, dark banner, headings with one word in serif italic, off-white sections, `[01]` numbering and pill buttons with a round arrow. Fonts are Inter Tight and Playfair Display (italic accents only).
 
@@ -51,7 +54,7 @@ Colours come from JKUATES, not ACAL:
 | `--deep` | `#0A2418` | Dark green for hero, CTA and footer (chosen to pair with the above) |
 
 Contact details:
-- Email: candidates recruitment@jkuates.jkuat.ac.ke; clients consultancy@jkuates.jkuat.ac.ke
+- Email: recruitment@jkuates.jkuat.ac.ke
 - Phone for everyone: 0736 524200
 - Address: JKUAT Main Campus, Juja. Hours: Mon to Fri 8am to 5pm (no Saturdays).
 

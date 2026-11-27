@@ -252,8 +252,8 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 .faq details p { margin: 0 0 18px; padding-right: 44px; font-size: .95rem; }
 .faq details a { font-weight: 600; overflow-wrap: anywhere; }
 
-/* Contact: candidates, clients, details */
-.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* Contact: candidate card, with address and hours beside it */
+.contact { display: grid; grid-template-columns: 2fr 1fr; gap: 20px 40px; align-items: start; }
 .contact__card {
   background: var(--white); border-radius: var(--radius-lg); padding: 32px;
   display: flex; flex-direction: column; align-items: flex-start;
@@ -266,8 +266,7 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 .contact__card--dark { background: var(--deep); color: rgba(255,255,255,.78); }
 .contact__card--dark h3 { color: var(--white); }
 .contact__card--dark .contact__label { color: var(--lime); }
-/* Address and hours: one row under the two cards */
-.contact__info { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px 48px; padding: 8px 4px; font-size: .95rem; }
+.contact__info { display: grid; gap: 20px; padding: 32px 4px; font-size: .95rem; }
 .contact__info p { margin: 0; color: var(--ink); }
 .contact__info span { display: block; font-size: .8rem; color: var(--muted); }
 
@@ -324,6 +323,6 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   .notice { margin-top: 24px; font-size: .88rem; }
   .contact { grid-template-columns: 1fr; }
   .contact__card { padding: 24px; }
-  .contact__info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contact__info { grid-template-columns: 1fr 1fr; gap: 16px; padding: 8px 4px; }
   .footer a { margin: 0 16px 0 0; }
 }
