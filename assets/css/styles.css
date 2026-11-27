@@ -170,14 +170,14 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 
 /* Each job: a full-width card; the whole card opens the job */
 .embed_jobs_head ul.rec-job-info {
-  position: relative; display: flex !important; flex-direction: column; gap: 16px;
+  position: relative; display: flex !important; justify-content: space-between; align-items: flex-start; gap: 32px;
   width: 100% !important; margin: 0 0 14px !important; padding: 24px 28px !important;
   background: var(--white) !important; border: 1px solid var(--line) !important; border-radius: var(--radius) !important;
   transition: border-color .2s ease, box-shadow .2s ease;
 }
 .embed_jobs_head ul.rec-job-info:last-child { margin-bottom: 0 !important; }
 .embed_jobs_head ul.rec-job-info:hover { border-color: var(--brand) !important; box-shadow: 0 10px 28px rgba(6,20,13,.08); }
-.embed_jobs_head .zr_fillayout_info { width: 100% !important; min-width: 0; }
+.embed_jobs_head .zr_fillayout_info { flex: 1 1 auto !important; width: auto !important; min-width: 0; max-width: 780px; }
 .embed_jobs_head .zr_fillayout_info li { width: auto !important; max-width: none !important; }
 .embed_jobs_head .rec-job-title { margin-bottom: 6px !important; }
 .embed_jobs_head .rec-job-title a {
@@ -189,13 +189,13 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 .embed_jobs_head ul.rec-job-info:hover .rec-job-title a { color: var(--brand) !important; }
 .embed_jobs_head .zrsite_Location { color: var(--muted) !important; font-size: .92rem !important; margin-bottom: 10px !important; }
 .embed_jobs_head li.zrsite_Job_Description { color: var(--text) !important; font-size: .95rem !important; line-height: 1.6 !important; }
-/* Job type and deadline: a row along the bottom of the card, with an arrow pointing to the job */
+/* Job type and date: right-hand column, with an arrow pointing to the job */
 .embed_jobs_head li.zrsite_Date_Opened {
-  width: 100% !important; padding-top: 14px; border-top: 1px solid var(--line);
-  display: flex !important; flex-direction: row-reverse !important; align-items: center !important; justify-content: flex-end; gap: 14px;
+  flex: 0 0 auto !important; width: auto !important;
+  display: flex !important; flex-direction: column-reverse !important; align-items: flex-end !important; gap: 6px;
 }
 .embed_jobs_head li.zrsite_Date_Opened::after {
-  content: "\2197"; order: -1; display: grid; place-items: center; margin: 0 0 0 auto;
+  content: "\2197"; order: -1; display: grid; place-items: center; margin-top: 10px;
   width: 38px; height: 38px; border-radius: 50%; background: var(--brand); color: var(--white); font-size: 1rem;
   transition: transform .25s ease;
   /* The hover rotation would otherwise lift the arrow above the card's link and block the click */
@@ -316,9 +316,9 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   .jobs-panel { padding: 18px; min-height: 260px; }
   .embed_jobs_head .rec-what-where { flex-wrap: wrap; gap: 10px; margin-bottom: 16px !important; }
   .embed_jobs_head .rec-what-where input { flex: 1 1 100%; min-height: 46px; }
-  .embed_jobs_head ul.rec-job-info { gap: 14px; padding: 20px !important; }
-  .embed_jobs_head li.zrsite_Date_Opened { gap: 12px; padding-top: 0; border-top: 0; }
-  .embed_jobs_head li.zrsite_Date_Opened::after { width: 34px; height: 34px; }
+  .embed_jobs_head ul.rec-job-info { flex-direction: column; gap: 14px; padding: 20px !important; }
+  .embed_jobs_head li.zrsite_Date_Opened { flex-direction: row-reverse !important; align-items: center !important; gap: 12px; width: 100% !important; justify-content: flex-end; }
+  .embed_jobs_head li.zrsite_Date_Opened::after { margin: 0 0 0 auto; width: 34px; height: 34px; }
   .embed_jobs_head .rec-job-title a { font-size: 1.1rem !important; }
   .section { padding: 64px 0; }
   h2 { margin-bottom: 20px; }
