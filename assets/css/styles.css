@@ -108,8 +108,8 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   background: repeating-radial-gradient(ellipse 60% 48% at 72% 30%, transparent 0 34px, rgba(255,255,255,.05) 34px 36px);
   mask-image: radial-gradient(70% 70% at 70% 40%, #000 30%, transparent 85%);
 }
-.hero__inner { position: relative; padding-top: 72px; padding-bottom: 120px; }
-.hero h1 { color: var(--white); margin-bottom: 12px; }
+.hero__inner { position: relative; padding-top: 72px; padding-bottom: 144px; }
+.hero h1 { color: var(--white); margin-bottom: 20px; }
 .hero h1 em.accent { color: var(--lime); }
 .lead { font-size: 1.1rem; color: rgba(255,255,255,.8); max-width: 600px; margin: 0; }
 
@@ -304,7 +304,8 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   .header__inner { height: 68px; }
   .nav { top: 69px; left: -16px; right: -16px; padding: 12px 16px 20px; }
   .brand__text { display: none; }
-  .hero__inner { padding-top: 56px; padding-bottom: 96px; }
+  .hero__inner { padding-top: 48px; padding-bottom: 112px; }
+  .hero h1 { margin-bottom: 16px; }
   .jobs { margin-top: -64px; padding-bottom: 72px; }
   #apply { padding-top: 64px; }
   .jobs-panel { padding: 18px; min-height: 260px; }
