@@ -231,12 +231,8 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 .notice a { font-weight: 600; }
 
 /* FAQ: collapsible questions under "Before you apply" */
-/* Desktop: heading on the left, questions on the right. Stacks on smaller screens. */
-.faq { margin-top: 64px; display: grid; grid-template-columns: 1fr 2fr; gap: 24px 64px; align-items: start; }
-.faq__head { position: sticky; top: 100px; }
+.faq { margin-top: 56px; }
 .faq__title { margin: 0 0 12px; }
-.faq__head p { margin: 0; font-size: .95rem; }
-.faq__head a { font-weight: 600; overflow-wrap: anywhere; }
 .faq details { border-bottom: 1px solid var(--line); }
 .faq details:first-of-type { border-top: 1px solid var(--line); }
 .faq summary {
@@ -302,8 +298,6 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   .nav .btn { margin-top: 16px; justify-content: space-between; }
   .steps { grid-template-columns: 1fr 1fr; row-gap: 24px; }
   .steps li:nth-child(3) { padding-left: 0; border-left: 0; }
-  .faq { grid-template-columns: 1fr; margin-top: 56px; }
-  .faq__head { position: static; }
 }
 @media (max-width: 600px) {
   body { font-size: 16px; }
