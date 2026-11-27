@@ -67,12 +67,35 @@ var ZOHO_DEADLINE_FIELD = "Target_Date";
       var link = card && card.querySelector(".rec-job-title a");
       var id = link && (link.href.match(/\/(\d{6,})\//) || [])[1];
       var due = id && deadlines[id];
-      if (due) {
+      if (due && isPast(due)) {
+        // Safety net: Zoho unpublishes jobs after their deadline, but never show one here
+        card.style.display = "none";
+        card.setAttribute("data-expired", "");
+      } else if (due) {
         span.textContent = "Deadline: " + formatDate(due);
       } else {
         span.style.display = "none";
       }
     });
+    showEmptyIfAllExpired(root);
+  }
+
+  // If every listed job is past its deadline, say so instead of showing a blank list
+  function showEmptyIfAllExpired(root) {
+    var cards = root.querySelectorAll("ul.rec-job-info");
+    var expired = root.querySelectorAll("ul.rec-job-info[data-expired]");
+    if (!cards.length || cards.length !== expired.length || root.querySelector(".jobs-empty")) return;
+    var msg = document.createElement("p");
+    msg.className = "jobs-empty";
+    msg.textContent = ZOHO_CONFIG.empty_job_msg;
+    root.appendChild(msg);
+  }
+
+  // True once the whole deadline day has passed (the job is open until the end of that day)
+  function isPast(value) {
+    var d = parseDate(value);
+    if (!d) return false;
+    return new Date() > new Date(d.year, d.month - 1, d.day, 23, 59, 59);
   }
 
   // A date like 20/11/2026 can only be day-first, and 11/20/2026 only month-first
@@ -85,15 +108,22 @@ var ZOHO_DEADLINE_FIELD = "Target_Date";
     });
   }
 
-  // Show Zoho's numeric dates as "20 Dec 2026" so they can't be misread
-  function formatDate(value) {
+  // Read a Zoho date (e.g. 10/12/2026) using the detected day/month order
+  function parseDate(value) {
     var m = String(value).match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
-    if (!m) return value;
+    if (!m) return null;
     var day = Number(ZOHO_DATE_ORDER === "DMY" ? m[1] : m[2]);
     var month = Number(ZOHO_DATE_ORDER === "DMY" ? m[2] : m[1]);
+    if (month < 1 || month > 12 || day < 1 || day > 31) return null;
+    return { day: day, month: month, year: Number(m[3]) };
+  }
+
+  // Show Zoho's numeric dates as "20 Dec 2026" so they can't be misread
+  function formatDate(value) {
+    var d = parseDate(value);
+    if (!d) return value;
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    if (month < 1 || month > 12 || day < 1 || day > 31) return value;
-    return day + " " + months[month - 1] + " " + m[3];
+    return d.day + " " + months[d.month - 1] + " " + d.year;
   }
   // Mobile navigation
   var toggle = document.querySelector(".nav-toggle");

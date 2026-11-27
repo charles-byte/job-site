@@ -120,6 +120,18 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   box-shadow: var(--shadow); padding: 36px; min-height: 360px;
 }
 .jobs-fallback { text-align: center; padding: 32px 10px; }
+.jobs-empty { text-align: center; padding: 32px 10px; color: var(--muted); margin: 0; }
+
+/* Fee warning and privacy line under the job list */
+.jobs-notes { margin-top: 20px; display: grid; gap: 8px; }
+.jobs-note { margin: 0; font-size: .85rem; color: var(--muted); padding-left: 4px; }
+.jobs-note--fee {
+  display: flex; gap: 12px; align-items: flex-start; padding: 14px 18px;
+  border-radius: var(--radius); background: var(--lime-soft); color: var(--ink); font-size: .92rem;
+}
+.jobs-note--fee svg { flex: none; color: var(--brand); width: 20px; height: 20px; margin-top: 1px; }
+.jobs-note--fee strong { font-weight: 600; }
+.jobs-note--fee a { font-weight: 600; overflow-wrap: anywhere; }
 
 /* Light-touch overrides so Zoho's embedded list matches the site.
    Only visual properties are changed; Zoho's markup and behaviour are untouched. */
@@ -191,7 +203,9 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   padding: 4px 12px; border-radius: 999px; background: var(--lime-soft);
   color: var(--brand-dark) !important; font-size: .8rem !important; font-weight: 600 !important; white-space: nowrap;
 }
-.embed_jobs_head span.zrsite_Date_Opened { color: var(--ink) !important; font-size: .82rem !important; font-weight: 600 !important; white-space: nowrap; }
+/* Zoho gives every .zrsite_Date_Opened (the column and the date inside it) width: 30% */
+.embed_jobs_head span.zrsite_Date_Opened { flex: none; width: auto !important; color: var(--ink) !important; font-size: .82rem !important; font-weight: 600 !important; white-space: nowrap; }
+.embed_jobs_head span.zrsite_Job_Type { flex: none; }
 
 /* Sections */
 .section { padding: 88px 0; }
