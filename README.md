@@ -86,7 +86,7 @@ In Zoho Recruit, open your career site's **Customize / Theme** settings and:
 
 ### 4. Hosting: `apply.jkuates.co.ke` on the jkuates.co.ke cPanel
 The page lives at **`apply.jkuates.co.ke`**, a subdomain on the jkuates.co.ke cPanel hosting.
-cPanel pulls the site from this (public) GitHub repo every 10 minutes and copies
+A cPanel cron job pulls the site from this (public) GitHub repo every 10 minutes and copies
 `index.html` and `assets/` into the subdomain's folder. No FTP account or password is
 needed (the hosting plan allows only one FTP account, used by e-learning). To publish a
 change: commit and push to `claude/tender-ptolemy-gt93ih`, then wait up to 10 minutes.
@@ -104,11 +104,14 @@ One-time setup:
    (`*/10 * * * *`), Command (one line):
 
    ```sh
-   (cd "$HOME/repositories/job-site" && git fetch -q origin && git reset -q --hard origin/claude/tender-ptolemy-gt93ih && cp -f index.html "$HOME/apply.jkuates.co.ke/" && cp -Rf assets "$HOME/apply.jkuates.co.ke/") >> "$HOME/apply-deploy.log" 2>&1
+   (cd "$HOME/repositories/job-site" && old=$(git rev-parse HEAD) && git fetch -q origin && git reset -q --hard origin/claude/tender-ptolemy-gt93ih && cp -f index.html "$HOME/apply.jkuates.co.ke/" && cp -Rf assets "$HOME/apply.jkuates.co.ke/" && if [ "$old" != "$(git rev-parse HEAD)" ]; then uapi NginxCaching clear_cache > /dev/null && date "+%F %T deployed $(git rev-parse --short HEAD), cache cleared"; fi) >> "$HOME/apply-deploy.log" 2>&1
    ```
 
    If step 1 gave a different Document Root, change both `$HOME/apply.jkuates.co.ke/` parts to it.
-   Errors (if any) are written to `~/apply-deploy.log`; it stays empty when all is well.
+   The server has an NGINX cache in front of the site that keeps serving the old page after
+   new files are copied. The command therefore clears that cache, but only when a new commit
+   arrived. `~/apply-deploy.log` gets one "deployed ..., cache cleared" line per new commit,
+   plus any errors. To clear it by hand: **cPanel > NGINX Caching > Clear Cache**.
 4. **cPanel > SSL/TLS Status:** run AutoSSL for the subdomain so it loads over https.
 
 Notes: only `index.html` and `assets/` are copied, so the README, `zoho/` notes and git files
