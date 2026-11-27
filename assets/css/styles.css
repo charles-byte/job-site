@@ -232,7 +232,7 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 
 /* FAQ: collapsible questions under "Before you apply" */
 .faq { margin-top: 56px; }
-.faq__title { margin: 0 0 12px; color: var(--brand-dark); }
+.faq__title { margin: 0 0 12px; color: var(--brand-dark); font-weight: 700; }
 .faq details { border-bottom: 1px solid var(--line); }
 .faq details:first-of-type { border-top: 1px solid var(--line); }
 .faq summary {
