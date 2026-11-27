@@ -141,6 +141,72 @@ var ZOHO_DEADLINE_FIELD = "Target_Date";
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return d.day + " " + months[d.month - 1] + " " + d.year;
   }
+  // Moving banner background: slowly shifting green "contour" bands, in the spirit of the
+  // looping video on acalconsulting.co.ke but drawn in the browser (nothing to download).
+  // Only runs with ?hero=flow for now. Pauses when the banner is off screen, and stays
+  // still for visitors who have asked their device to reduce motion.
+  if (document.documentElement.classList.contains("hero-flow")) heroFlow();
+
+  function heroFlow() {
+    var hero = document.querySelector(".hero");
+    var canvas = document.createElement("canvas");
+    if (!hero || !canvas.getContext) return;
+    canvas.className = "hero__flow";
+    canvas.setAttribute("aria-hidden", "true");
+    hero.insertBefore(canvas, hero.firstChild);
+    var ctx = canvas.getContext("2d");
+    var CELL = 6;                       // one canvas pixel per 6 screen pixels; the browser smooths it
+    var BANDS = 7;                      // number of terraces
+    var dark = [10, 36, 24];            // --deep
+    var light = [5, 128, 54];           // --brand
+    var w, h, img, visible = true, last = 0;
+    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function resize() {
+      w = Math.max(1, Math.ceil(hero.offsetWidth / CELL));
+      h = Math.max(1, Math.ceil(hero.offsetHeight / CELL));
+      canvas.width = w; canvas.height = h;
+      img = ctx.createImageData(w, h);
+      draw(last);
+    }
+
+    function draw(time) {
+      var t = time / 1000 * 0.12, d = img.data, i = 0;
+      for (var y = 0; y < h; y++) {
+        for (var x = 0; x < w; x++) {
+          var u = x * CELL / 170, v = y * CELL / 170;
+          var n = Math.sin(u * 1.3 + t) + Math.sin(v * 1.9 - t * 0.8) +
+                  Math.sin((u + v) * 0.8 + t * 0.6) + Math.sin(Math.sqrt((u - 4) * (u - 4) + (v - 1) * (v - 1)) * 1.5 - t * 1.2);
+          n = (n + 4) / 8 * BANDS;
+          var band = Math.floor(n), edge = n - band;
+          // each band a step lighter, with a soft highlight along its upper edge
+          var k = (band / BANDS) * 0.8 + edge * 0.08 + (edge > 0.85 ? 0.1 : 0);
+          k = Math.max(0, Math.min(1, k));
+          d[i++] = dark[0] + (light[0] - dark[0]) * k;
+          d[i++] = dark[1] + (light[1] - dark[1]) * k;
+          d[i++] = dark[2] + (light[2] - dark[2]) * k;
+          d[i++] = 255;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+    }
+
+    function frame(now) {
+      requestAnimationFrame(frame);
+      if (!visible || now - last < 40) return;   // about 25 frames a second is plenty
+      last = now;
+      draw(now);
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+    if (still) return;
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(hero);
+    }
+    requestAnimationFrame(frame);
+  }
+
   // Mobile navigation
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("nav");

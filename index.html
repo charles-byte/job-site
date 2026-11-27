@@ -21,6 +21,15 @@
   <!-- Zoho Recruit embed stylesheet (part of Zoho's official "Embed Jobs" snippet) -->
   <link rel="stylesheet" href="https://static.zohocdn.com/recruit/embed_careers_site/css/v1.1/embed_jobs.css" type="text/css">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- PREVIEW SWITCHES (temporary): ?header=a or ?header=b picks the mobile header,
+       ?hero=flow turns on the moving banner background. Remove once options are chosen. -->
+  <script>
+    (function (q, c) {
+      var m = q.match(/[?&]header=(a|b)\b/);
+      if (m) c.add("hdr-" + m[1]);
+      if (/[?&]hero=flow\b/.test(q)) c.add("hero-flow");
+    })(location.search, document.documentElement.classList);
+  </script>
 </head>
 <body>
 
@@ -30,6 +39,7 @@
       <div class="header__inner">
         <a class="brand" href="https://jkuates.co.ke" aria-label="JKUAT Enterprises Ltd home">
           <img src="assets/img/logo.png" alt="JKUAT Enterprises Ltd" class="brand__logo" onerror="this.remove()">
+          <img src="assets/img/favicon-192.png" alt="" class="brand__emblem" aria-hidden="true" loading="lazy">
           <span class="brand__text">
             <strong>Careers</strong>
             <small>JKUAT Enterprises Ltd</small>

@@ -82,6 +82,7 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 .brand:hover { color: var(--ink); }
 /* The official logo has a light grey background; multiply blends it into the white bar */
 .brand__logo { height: 44px; width: auto; mix-blend-mode: multiply; }
+.brand__emblem { display: none; width: 40px; height: 40px; border-radius: 50%; }
 .brand__text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand__text strong { font-size: 1rem; font-weight: 700; }
 .brand__text small { font-size: .72rem; color: var(--muted); }
@@ -108,7 +109,14 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   background: repeating-radial-gradient(ellipse 60% 48% at 72% 30%, transparent 0 34px, rgba(255,255,255,.05) 34px 36px);
   mask-image: radial-gradient(70% 70% at 70% 40%, #000 30%, transparent 85%);
 }
-.hero__inner { position: relative; padding-top: 72px; padding-bottom: 144px; }
+/* Moving background (preview: ?hero=flow). Drawn small by main.js and stretched smoothly */
+.hero__flow { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero-flow .hero__contours { display: none; }
+.hero-flow .hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(10,36,24,.55), rgba(10,36,24,0) 70%);
+}
+.hero__inner { position: relative; z-index: 1; padding-top: 72px; padding-bottom: 144px; }
 .hero h1 { color: var(--white); margin-bottom: 20px; }
 .hero h1 em.accent { color: var(--lime); }
 .lead { font-size: 1.1rem; color: rgba(255,255,255,.8); max-width: 600px; margin: 0; }
@@ -307,10 +315,30 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
 @media (max-width: 600px) {
   body { font-size: 16px; }
   .container { padding: 0 16px; }
-  .header__inner { height: 68px; }
-  .nav { top: 69px; left: -16px; right: -16px; padding: 12px 16px 20px; }
+  /* Floating white pill header (as on acalconsulting.co.ke), over the green banner */
+  .header {
+    background: transparent; border-bottom: 0; box-shadow: none !important;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    padding-top: 10px; margin-bottom: -68px;
+  }
+  .header .container { padding: 0 12px; }
+  .header__inner {
+    height: 58px; padding: 0 8px 0 14px; border-radius: 999px;
+    background: rgba(255,255,255,.96); box-shadow: 0 8px 24px rgba(6,20,13,.14);
+  }
+  .nav-toggle { width: 42px; height: 42px; }
+  .nav { top: 66px; left: 0; right: 0; padding: 8px 18px 18px; border-radius: 22px; }
+  .brand__logo { height: 42px; }
   .brand__text { display: none; }
-  .hero__inner { padding-top: 48px; padding-bottom: 112px; }
+  .hero__inner { padding-top: 116px; padding-bottom: 112px; }
+
+  /* Header previews: ?header=a full logo + name, ?header=b round emblem + name */
+  .hdr-a .brand__text, .hdr-b .brand__text { display: flex; }
+  .hdr-a .brand__logo { height: 36px; }
+  .hdr-b .brand__logo { display: none; }
+  .hdr-b .brand__emblem { display: block; }
+  .brand__text strong { font-size: .95rem; }
+  .brand__text small { font-size: .68rem; }
   .hero h1 { margin-bottom: 16px; }
   .jobs { margin-top: -64px; padding-bottom: 72px; }
   #apply { padding-top: 64px; }
