@@ -160,6 +160,8 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   background: var(--paper) !important; border: 1px solid var(--line) !important;
   border-radius: 12px !important; color: var(--ink) !important;
 }
+/* All jobs are local, so the location box is not needed (Zoho's search treats it as empty) */
+.embed_jobs_head .rec-what-where .searchWhere { display: none !important; }
 .embed_jobs_head .rec-what-where input:focus { outline: 2px solid var(--brand); outline-offset: 1px; background: var(--white) !important; }
 .embed_jobs_head .rec-what-where .searchButton {
   flex: 0 0 auto; padding: 0 32px !important; cursor: pointer;
@@ -176,6 +178,10 @@ em.accent { font-family: var(--serif); font-style: italic; font-weight: 500; let
   transition: border-color .2s ease, box-shadow .2s ease;
 }
 .embed_jobs_head ul.rec-job-info:last-child { margin-bottom: 0 !important; }
+/* Keep cards hidden when Zoho's search (or the expiry check in main.js) hides them */
+.embed_jobs_head ul.rec-job-info[style*="display: none"],
+.embed_jobs_head ul.rec-job-info[style*="display:none"],
+.embed_jobs_head ul.rec-job-info[data-expired] { display: none !important; }
 .embed_jobs_head ul.rec-job-info:hover { border-color: var(--brand) !important; box-shadow: 0 10px 28px rgba(6,20,13,.08); }
 .embed_jobs_head .zr_fillayout_info { flex: 1 1 auto !important; width: auto !important; min-width: 0; max-width: 780px; }
 .embed_jobs_head .zr_fillayout_info li { width: auto !important; max-width: none !important; }

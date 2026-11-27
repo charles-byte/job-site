@@ -26,8 +26,24 @@ var ZOHO_DEADLINE_FIELD = "Target_Date";
     if (fallback && target && !target.children.length && !target.textContent.trim()) fallback.hidden = false;
   }
 
+  // Wording for Zoho's search box (Zoho's default is "Job title or skill")
+  var SEARCH_PLACEHOLDER = "Job title or position";
+  // Zoho adds the search row above the job list, inside .embed_jobs_head
+  var widget = document.querySelector(".embed_jobs_head");
+  function relabelSearch() {
+    var box = widget && widget.querySelector("input.searchWhat");
+    if (box && box.placeholder !== SEARCH_PLACEHOLDER) {
+      box.placeholder = SEARCH_PLACEHOLDER;
+      box.setAttribute("aria-label", SEARCH_PLACEHOLDER);
+    }
+  }
+
   if (window.rec_embed_js && typeof window.rec_embed_js.load === "function") {
     window.rec_embed_js.load(ZOHO_CONFIG);
+    if (widget && window.MutationObserver) {
+      relabelSearch();
+      new MutationObserver(relabelSearch).observe(widget, { childList: true, subtree: true });
+    }
     setTimeout(showFallback, 8000);
     watchDeadlines();
   } else {
